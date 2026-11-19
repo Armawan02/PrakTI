@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="pk-guest">
-    <aside class="pk-guest-aside">
+    <aside class="pk-guest-aside {{ request()->routeIs('login') ? 'pk-guest-aside--photo' : '' }}">
         <a href="{{ route('beranda') }}" class="pk-logo">
             <img src="{{ asset('images/prakti-logo.svg') }}" alt="PrakTI — Platform Kerja Praktik Industri" class="pk-logo-image">
         </a>

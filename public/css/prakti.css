@@ -68,6 +68,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--pk-ink); outline-
   color: #fff; text-decoration: none; font-weight: 700; font-size: 1.3125rem; letter-spacing: -.01em;
 }
 .pk-logo:hover { color: #fff; }
+.pk-logo-image { display: block; width: 100%; max-width: 220px; height: auto; }
 .pk-logo-mark {
   width: 2rem; height: 2rem; border-radius: 8px; display: grid; place-items: center;
   background: var(--pk-highlight); color: var(--pk-ink-dark); font-size: 1rem;

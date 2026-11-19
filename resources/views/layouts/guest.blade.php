@@ -14,7 +14,7 @@
 <div class="pk-guest">
     <aside class="pk-guest-aside">
         <a href="{{ route('beranda') }}" class="pk-logo">
-            <span class="pk-logo-mark"><i class="bi bi-journal-text"></i></span>PrakTI
+            <img src="{{ asset('images/prakti-logo.svg') }}" alt="PrakTI — Platform Kerja Praktik Industri" class="pk-logo-image">
         </a>
         <p class="pk-guest-title">Kerja Praktik Industri, tercatat rapi setiap hari.</p>
         <p class="pk-guest-desc">Ajukan KPI, isi logbook harian, perbarui progress, dan terima arahan dosen pembimbing di satu tempat.</p>

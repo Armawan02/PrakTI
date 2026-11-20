@@ -16,7 +16,7 @@
 <header class="pk-land-nav">
     <div class="container d-flex align-items-center gap-3">
         <a href="{{ route('beranda') }}" class="pk-logo pk-logo--dark">
-            <span class="pk-logo-mark"><i class="bi bi-journal-text"></i></span>PrakTI
+            <img src="{{ asset('images/prakti-logo-dark.svg') }}" alt="PrakTI — Platform Kerja Praktik Industri" class="pk-logo-image pk-logo-image--landing">
         </a>
         <nav class="ms-auto d-none d-md-flex gap-4" aria-label="Navigasi halaman">
             <a href="#alur">Alur KPI</a>

@@ -68,6 +68,7 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--pk-ink); outline-
   color: #fff; text-decoration: none; font-weight: 700; font-size: 1.3125rem; letter-spacing: -.01em;
 }
 .pk-logo:hover { color: #fff; }
+.pk-logo-image { display: block; width: 100%; max-width: 220px; height: auto; }
 .pk-logo-mark {
   width: 2rem; height: 2rem; border-radius: 8px; display: grid; place-items: center;
   background: var(--pk-highlight); color: var(--pk-ink-dark); font-size: 1rem;
@@ -286,6 +287,14 @@ a.pk-summary-item:hover { background: #FAFBFD; }
   background-position: 0 -7px;
 }
 .pk-guest-aside::before { content: ""; position: absolute; top: 0; bottom: 0; left: 3rem; width: 2px; background: rgba(227, 166, 166, .5); }
+.pk-guest-aside--photo {
+  overflow: hidden;
+  border-radius: 0 24px 24px 0;
+  background-image: linear-gradient(180deg, rgba(31, 92, 157, .46), rgba(20, 48, 83, .72)), url("../images/perpus.png");
+  background-size: cover;
+  background-position: center;
+}
+.pk-guest-aside--photo::before { display: none; }
 .pk-guest-aside .pk-logo { line-height: var(--garis); }
 .pk-guest-title {
   margin: calc(var(--garis) * 2) 0 0; max-width: 17ch;

@@ -418,6 +418,7 @@ details.pk-panel > summary { cursor: pointer; }
 .pk-land-nav nav a { color: var(--pk-text); text-decoration: none; font-weight: 500; }
 .pk-land-nav nav a:hover { color: var(--pk-ink); }
 .pk-logo--dark, .pk-logo--dark:hover { color: var(--pk-ink); }
+.pk-logo-image--landing { width: 140px; max-width: none; height: auto; }
 .pk-hero {
   --garis: 40px;
   padding: calc(var(--garis) * 2) 0 calc(var(--garis) * 2);

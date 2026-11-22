@@ -25,6 +25,13 @@
         .tabel th, .tabel td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
         .tabel th { background: #F1F4F8; font-weight: 600; }
         .tabel .angka { text-align: right; white-space: nowrap; }
+        .surat-meta { display: flex; justify-content: flex-end; gap: 1.25rem; margin-bottom: 1rem; font-size: 9.5pt; }
+        .surat-recipient { margin-bottom: 1rem; }
+        .surat-paragraph { margin: 0 0 .8rem; text-align: justify; }
+        .surat-table { margin: .75rem 0 1rem; }
+        .surat-signature { width: 52%; margin: 1.5rem 0 0 auto; text-align: center; }
+        .surat-signature-space { height: 64px; }
+        .surat-signature-name { font-weight: 600; text-decoration: underline; }
         .ttd { display: grid; grid-template-columns: repeat(var(--kolom, 2), 1fr); gap: 16px; margin-top: 36px; text-align: center; }
         .ttd .ruang { height: 64px; }
         .ttd .nama { font-weight: 600; text-decoration: underline; }
@@ -41,6 +48,7 @@
 <body>
 <div class="toolbar">
     <button type="button" onclick="window.print()">Cetak atau simpan sebagai PDF</button>
+    @yield('aksi-cetak')
     <a href="javascript:history.back()">Kembali</a>
 </div>
 <div class="halaman">

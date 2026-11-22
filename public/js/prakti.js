@@ -1,7 +1,6 @@
 // PrakTI — interaksi di sisi browser (tanpa build step)
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (event) => {
-<<<<<<< HEAD
     const tambahAnggota = event.target.closest('[data-tambah-anggota]');
     if (tambahAnggota) {
       const form = tambahAnggota.closest('[data-anggota-form]');
@@ -30,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-=======
->>>>>>> 195f75c759da6cd88db2fb2e2cdf7685768de9c9
     const tombol = event.target.closest('[data-password-toggle]');
     if (!tombol) return;
 
@@ -46,14 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
     tombol.querySelector('i').className = tampil ? 'bi bi-eye-slash' : 'bi bi-eye';
   });
 
-<<<<<<< HEAD
   function perbaruiTombolAnggota(form) {
     const tombol = form.querySelector('[data-tambah-anggota]');
     tombol.disabled = form.querySelectorAll('[data-anggota-row]').length >= 4;
   }
 
-=======
->>>>>>> 195f75c759da6cd88db2fb2e2cdf7685768de9c9
   /* ---------------------------------------------------------------
    * Modal konfirmasi untuk tindakan penting (Look & Feel #18)
    * <form data-confirm="..."> atau <button data-konfirmasi="...">

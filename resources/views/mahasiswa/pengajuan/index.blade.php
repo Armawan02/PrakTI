@@ -34,7 +34,12 @@
                 <div class="row g-4">
                     <div class="col-lg-6">
                         <h3 class="pk-subtitle">1. Siapkan surat permohonan</h3>
-                        @if ($suratPermohonan)<div class="alert alert-success py-2 mb-3">Nomor surat Anda: <strong>{{ $suratPermohonan->nomor_surat }}</strong></div>@endif
+                        @if ($suratPermohonan)
+                            <div class="alert alert-success py-2 mb-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+                                <span>Nomor surat Anda: <strong>{{ $suratPermohonan->nomor_surat }}</strong></span>
+                                <a href="{{ route('mahasiswa.pengajuan.surat-permohonan.lihat', $pengajuan) }}" class="btn btn-sm btn-outline-success"><i class="bi bi-eye me-1" aria-hidden="true"></i>Lihat overview surat</a>
+                            </div>
+                        @endif
                         <form method="POST" action="{{ route('mahasiswa.pengajuan.surat-permohonan', $pengajuan) }}" class="pk-letter-form">
                             @csrf
                             <x-input name="penerima" label="Penerima surat" :value="$suratPermohonan?->penerima ?? 'Pimpinan'" :required="true" hint="Contoh: Kepala Dinas atau Pimpinan perusahaan." />
@@ -44,7 +49,10 @@
                             </div>
                             <p class="small text-secondary mb-3">Periode KPI: {{ ($suratPermohonan?->tanggal_mulai ?? $pengajuan->tanggal_mulai)->translatedFormat('d F Y') }} – {{ ($suratPermohonan?->tanggal_selesai ?? $pengajuan->tanggal_selesai)->translatedFormat('d F Y') }}. Admin dapat menyesuaikan tanggal dan data surat bila diperlukan.</p>
                             @include('partials.surat-anggota-fields', ['pengajuan' => $pengajuan, 'surat' => $suratPermohonan, 'kunciAnggotaPertama' => true])
-                            <button type="submit" class="btn btn-primary mt-2"><i class="bi bi-file-earmark-word me-1" aria-hidden="true"></i>{{ $suratPermohonan ? 'Simpan dan unduh surat' : 'Buat dan unduh surat' }}</button>
+                            <div class="d-flex flex-wrap gap-2 mt-2">
+                                <button type="submit" name="aksi" value="unduh" class="btn btn-primary"><i class="bi bi-file-earmark-word me-1" aria-hidden="true"></i>{{ $suratPermohonan ? 'Simpan dan unduh DOCX' : 'Buat dan unduh DOCX' }}</button>
+                                <button type="submit" name="aksi" value="pratinjau" formtarget="_blank" class="btn btn-outline-primary"><i class="bi bi-eye me-1" aria-hidden="true"></i>Pratinjau surat</button>
+                            </div>
                         </form>
                     </div>
                     <div class="col-lg-6">

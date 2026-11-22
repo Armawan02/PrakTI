@@ -66,7 +66,29 @@ class SuratPermohonanController extends Controller
 
         AktivitasSistem::catat('Menyiapkan surat permohonan KPI', 'surat', $pengajuan->mahasiswa_id, $surat->nomor_surat);
 
+        if ($request->input('aksi') === 'pratinjau') {
+            return view('mahasiswa.pengajuan.surat-preview', compact('pengajuan', 'surat'));
+        }
+
         return $generator->unduh($surat);
+    }
+
+    public function lihatMahasiswa(Request $request, PengajuanKpi $pengajuan)
+    {
+        abort_unless($pengajuan->mahasiswa_id === $request->user()->mahasiswa?->id, 403);
+        abort_unless(in_array($pengajuan->status, [PengajuanKpi::DISETUJUI, PengajuanKpi::BERJALAN, PengajuanKpi::SELESAI], true), 403);
+
+        $surat = $pengajuan->suratPermohonan()->firstOrFail();
+
+        return view('mahasiswa.pengajuan.surat-preview', compact('pengajuan', 'surat'));
+    }
+
+    public function unduhMahasiswa(Request $request, PengajuanKpi $pengajuan, SuratPermohonanGenerator $generator)
+    {
+        abort_unless($pengajuan->mahasiswa_id === $request->user()->mahasiswa?->id, 403);
+        abort_unless(in_array($pengajuan->status, [PengajuanKpi::DISETUJUI, PengajuanKpi::BERJALAN, PengajuanKpi::SELESAI], true), 403);
+
+        return $generator->unduh($pengajuan->suratPermohonan()->with('pengajuan.mahasiswa')->firstOrFail());
     }
 
     public function editAdmin(PengajuanKpi $pengajuan)
@@ -79,6 +101,13 @@ class SuratPermohonanController extends Controller
     public function unduhAdmin(PengajuanKpi $pengajuan, SuratPermohonanGenerator $generator)
     {
         return $generator->unduh($pengajuan->suratPermohonan()->with('pengajuan.mahasiswa')->firstOrFail());
+    }
+
+    public function lihatAdmin(PengajuanKpi $pengajuan)
+    {
+        $surat = $pengajuan->suratPermohonan()->firstOrFail();
+
+        return view('mahasiswa.pengajuan.surat-preview', compact('pengajuan', 'surat'));
     }
 
     public function updateAdmin(Request $request, PengajuanKpi $pengajuan)

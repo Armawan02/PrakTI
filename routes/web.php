@@ -64,6 +64,9 @@ Route::middleware(['auth', 'role:admin,mahasiswa,pembimbing'])->group(function (
 
         Route::get('verifikasi-dokumen', [Admin\VerifikasiDokumenController::class, 'index'])->name('verifikasi.index');
         Route::patch('verifikasi-dokumen/{dokumen}', [Admin\VerifikasiDokumenController::class, 'update'])->name('verifikasi.update');
+        Route::post('pengajuan/{pengajuan}/dokumen', [Admin\DokumenController::class, 'store'])->name('pengajuan.dokumen.store');
+        Route::put('dokumen/{dokumen}', [Admin\DokumenController::class, 'update'])->name('dokumen.update');
+        Route::delete('dokumen/{dokumen}', [Admin\DokumenController::class, 'destroy'])->name('dokumen.destroy');
 
         Route::resource('periode', Admin\PeriodeController::class)->except(['create', 'edit'])->parameters(['periode' => 'periode']);
         Route::controller(Admin\KelompokController::class)->group(function () {

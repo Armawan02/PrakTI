@@ -1,5 +1,20 @@
 // PrakTI — interaksi di sisi browser (tanpa build step)
 document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', (event) => {
+    const tombol = event.target.closest('[data-password-toggle]');
+    if (!tombol) return;
+
+    const input = document.getElementById(tombol.getAttribute('aria-controls'));
+    if (!input) return;
+
+    const tampil = input.type === 'password';
+    input.type = tampil ? 'text' : 'password';
+    tombol.setAttribute('aria-pressed', String(tampil));
+    tombol.setAttribute('aria-label', tampil ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi');
+    tombol.title = tampil ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi';
+    tombol.querySelector('i').className = tampil ? 'bi bi-eye-slash' : 'bi bi-eye';
+  });
+
   /* ---------------------------------------------------------------
    * Modal konfirmasi untuk tindakan penting (Look & Feel #18)
    * <form data-confirm="..."> atau <button data-konfirmasi="...">

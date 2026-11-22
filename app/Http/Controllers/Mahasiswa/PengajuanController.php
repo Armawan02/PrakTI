@@ -47,7 +47,7 @@ class PengajuanController extends Controller
         $pengajuan = DB::transaction(function () use ($request, $data, $mhs) {
             $p = PengajuanKpi::create([
                 'mahasiswa_id' => $mhs->id, 'periode_id' => $data['periode_id'], 'tempat_kpi_id' => $this->tempatId($data),
-                'tanggal_pengajuan' => today(), 'keperluan' => $data['keperluan'], 'status' => PengajuanKpi::DIAJUKAN,
+                'tanggal_pengajuan' => today(), 'keperluan' => 'Tidak dicantumkan', 'status' => PengajuanKpi::DIAJUKAN,
             ]);
             $this->simpanBerkas($request, $p);
 
@@ -73,7 +73,7 @@ class PengajuanController extends Controller
         $data = $request->validate($this->aturan(false));
 
         DB::transaction(function () use ($request, $pengajuan, $data) {
-            $pengajuan->update(['periode_id' => $data['periode_id'], 'tempat_kpi_id' => $this->tempatId($data), 'keperluan' => $data['keperluan'], 'status' => PengajuanKpi::DIAJUKAN]);
+            $pengajuan->update(['periode_id' => $data['periode_id'], 'tempat_kpi_id' => $this->tempatId($data), 'status' => PengajuanKpi::DIAJUKAN]);
             $this->simpanBerkas($request, $pengajuan);
         });
 
@@ -168,7 +168,6 @@ class PengajuanController extends Controller
             'nama_pic' => ['nullable', 'string', 'max:100'],
             'no_hp_pic' => ['nullable', 'string', 'max:15'],
             'email_pic' => ['nullable', 'email', 'max:100'],
-            'keperluan' => ['required', 'string', 'min:20', 'max:2000'],
             'persyaratan' => [$baru ? 'required' : 'nullable', 'file', 'mimes:pdf', 'max:5120'],
             'proposal' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:5120'],
         ];

@@ -23,7 +23,6 @@
                 <div><dt>Jenis instansi</dt><dd>{{ $pengajuan->bidang_kerja }}</dd></div>
                 <div><dt>Alamat instansi</dt><dd class="fw-normal">{{ $pengajuan->alamat_instansi }}</dd></div>
                 <div><dt>Kontak instansi</dt><dd>{{ $pengajuan->pembimbing_lapangan ?: '–' }}<span class="d-block fw-normal small text-secondary">{{ $pengajuan->kontak_instansi }}</span></dd></div>
-                <div><dt>Keperluan</dt><dd class="fw-normal">{{ $pengajuan->keperluan }}</dd></div>
             </dl>
         </section>
 
@@ -58,7 +57,7 @@
 
         <section class="mb-4">
             <div class="pk-panel-head"><h2 class="pk-panel-title">Semua dokumen</h2></div>
-            @include('shared.dokumen', ['dokumen' => $pengajuan->dokumen])
+            @include('shared.dokumen', ['dokumen' => $pengajuan->dokumen, 'pengajuan' => $pengajuan])
             @if ($pengajuan->status !== 'selesai')
                 <details class="pk-panel mt-3"><summary class="fw-semibold">Unggah dokumen pendukung lainnya</summary>
                     <form method="POST" action="{{ route('mahasiswa.pengajuan.dokumen', $pengajuan) }}" enctype="multipart/form-data" class="mt-2">@csrf

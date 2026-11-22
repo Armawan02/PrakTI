@@ -17,6 +17,12 @@
         .halaman { background: #fff; width: 210mm; min-height: 297mm; margin: 1.5rem auto; padding: 18mm 18mm 20mm; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
         .kop { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; }
         .kop strong { font-size: 13pt; color: var(--ink); }
+        .kop-resmi { display: grid; grid-template-columns: 68px 1fr; align-items: center; gap: 12px; border-bottom: 4px double #111; padding-bottom: 8px; margin-bottom: 16px; color: #111; text-align: center; line-height: 1.25; }
+        .kop-resmi img { width: 68px; height: 68px; object-fit: contain; }
+        .kop-resmi-kementerian { font-size: 8.5pt; }
+        .kop-resmi-universitas { font-size: 13pt; font-weight: 700; }
+        .kop-resmi-fakultas { font-size: 11pt; font-weight: 700; }
+        .kop-resmi-kontak { margin-top: 3px; font-size: 7.5pt; }
         h1 { font-size: 14pt; text-align: center; margin: 0 0 14px; letter-spacing: .02em; }
         table { width: 100%; border-collapse: collapse; }
         .identitas td { padding: 2px 0; vertical-align: top; }
@@ -49,13 +55,21 @@
 <div class="toolbar">
     <button type="button" onclick="window.print()">Cetak atau simpan sebagai PDF</button>
     @yield('aksi-cetak')
-    <a href="javascript:history.back()">Kembali</a>
+    @hasSection('aksi-kembali')
+        @yield('aksi-kembali')
+    @else
+        <a href="javascript:history.back()">Kembali</a>
+    @endif
 </div>
 <div class="halaman">
-    <div class="kop">
-        <div><strong>PrakTI</strong><br><span>{{ config('prakti.nama_prodi') }}</span></div>
-        <span>Dicetak {{ now()->translatedFormat('d F Y') }}</span>
-    </div>
+    @hasSection('kop-resmi')
+        @yield('kop-resmi')
+    @else
+        <div class="kop">
+            <div><strong>PrakTI</strong><br><span>{{ config('prakti.nama_prodi') }}</span></div>
+            <span>Dicetak {{ now()->translatedFormat('d F Y') }}</span>
+        </div>
+    @endif
     @yield('content')
 </div>
 </body>

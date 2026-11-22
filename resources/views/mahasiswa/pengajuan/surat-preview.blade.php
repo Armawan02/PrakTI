@@ -8,6 +8,26 @@
     @endif
 @endsection
 
+@section('aksi-kembali')
+    @if (auth()->user()->isAdmin())
+        <a href="{{ route('admin.pengajuan.show', $pengajuan) }}">Kembali</a>
+    @else
+        <a href="{{ route('mahasiswa.pengajuan.index') }}">Kembali</a>
+    @endif
+@endsection
+
+@section('kop-resmi')
+    <div class="kop-resmi">
+        <img src="{{ asset('images/logo-unsulbar.png') }}" alt="Lambang Universitas Sulawesi Barat">
+        <div>
+            <div class="kop-resmi-kementerian">KEMENTERIAN PENDIDIKAN TINGGI, SAINS, DAN TEKNOLOGI</div>
+            <div class="kop-resmi-universitas">UNIVERSITAS SULAWESI BARAT</div>
+            <div class="kop-resmi-fakultas">FAKULTAS TEKNIK</div>
+            <div class="kop-resmi-kontak">Alamat: Kampus Padhang-Padhang, Banggae Timur, Majene, Sulawesi Barat<br>Website: ft.unsulbar.ac.id · Instagram: ft-universitas sulawesi barat</div>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="surat-document-info">
         <div>Nomor: {{ $surat->nomor_surat }}</div>

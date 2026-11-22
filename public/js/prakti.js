@@ -115,6 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     delete form.dataset.terkonfirmasi;
 
+    // Jangan menahan tombol pada halaman asal untuk submit yang dibuka di tab baru.
+    // Form pratinjau surat memakai formtarget="_blank" sehingga halaman ini tetap terbuka.
+    const target = tombol?.getAttribute('formtarget') || form.getAttribute('target');
+    if (target?.toLowerCase() === '_blank') return;
+
     // Indikator proses (NFR-02, Look & Feel #25). Nilai tombol submit disalin ke input tersembunyi
     // karena tombol yang dinonaktifkan tidak ikut terkirim.
     if (form.method.toLowerCase() === 'get') return;

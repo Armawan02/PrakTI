@@ -25,7 +25,7 @@
         .tabel th, .tabel td { border: 1px solid var(--line); padding: 6px 8px; vertical-align: top; text-align: left; }
         .tabel th { background: #F1F4F8; font-weight: 600; }
         .tabel .angka { text-align: right; white-space: nowrap; }
-        .surat-meta { display: flex; justify-content: flex-end; gap: 1.25rem; margin-bottom: 1rem; font-size: 9.5pt; }
+        .surat-document-info { margin-bottom: 1.25rem; }
         .surat-recipient { margin-bottom: 1rem; }
         .surat-paragraph { margin: 0 0 .8rem; text-align: justify; }
         .surat-table { margin: .75rem 0 1rem; }

@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-1">
                     @if (! (($kunciAnggotaPertama ?? false) && $i === 0))
-                        <button type="button" class="btn btn-outline-danger w-100" data-hapus-anggota aria-label="Hapus anggota {{ $loop->iteration }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-outline-danger pk-remove-member" data-hapus-anggota aria-label="Hapus anggota {{ $loop->iteration }}"><i class="bi bi-trash" aria-hidden="true"></i></button>
                     @endif
                 </div>
             </div>
@@ -41,7 +41,7 @@
                 <label for="anggota___INDEX___nim" class="form-label visually-hidden">NIM anggota</label>
                 <input id="anggota___INDEX___nim" name="anggota[__INDEX__][nim]" class="form-control" maxlength="20" placeholder="NIM anggota" required>
             </div>
-            <div class="col-md-1"><button type="button" class="btn btn-outline-danger w-100" data-hapus-anggota aria-label="Hapus anggota"><i class="bi bi-trash" aria-hidden="true"></i></button></div>
+            <div class="col-md-1"><button type="button" class="btn btn-outline-danger pk-remove-member" data-hapus-anggota aria-label="Hapus anggota"><i class="bi bi-trash" aria-hidden="true"></i></button></div>
         </div>
     </template>
 </div>

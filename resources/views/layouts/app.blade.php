@@ -24,6 +24,9 @@
                 <i class="bi bi-list fs-3"></i>
             </button>
             <div class="pk-page-head"><h1 class="pk-page-title">@yield('judul', 'Dashboard')</h1>@hasSection('subjudul')<p class="pk-page-sub">@yield('subjudul')</p>@endif</div>
+            @if (auth()->user()->isAdmin())
+                @include('partials.admin-reminders')
+            @endif
 
             <div class="ms-auto d-flex align-items-center gap-3">
                 @include('partials.notifikasi')

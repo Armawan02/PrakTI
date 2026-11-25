@@ -36,14 +36,32 @@
                 @if ($kandidat->isEmpty())<p class="text-secondary mb-0">Tidak ada mahasiswa yang siap ditempatkan.</p>
                 @else
                     <form method="POST" action="{{ route('admin.kelompok.anggota.tambah', $kelompok) }}">@csrf
+                        <div class="row g-2 mb-2" data-kandidat-filter>
+                            <div class="col-md-7">
+                                <label for="cari-kandidat" class="form-label">Cari mahasiswa atau instansi</label>
+                                <input id="cari-kandidat" type="search" class="form-control" placeholder="Nama, NIM, atau nama instansi" data-kandidat-search>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="filter-tempat-kandidat" class="form-label">Filter tempat KPI</label>
+                                <select id="filter-tempat-kandidat" class="form-select" data-kandidat-tempat>
+                                    <option value="" @selected($tempatKelompok->isEmpty())>Semua tempat KPI</option>
+                                    @if ($tempatKelompok->isNotEmpty())<option value="sama" selected>Tempat yang sama dengan kelompok</option>@endif
+                                    @foreach ($kandidat->unique('tempat_kpi_id') as $opsiTempat)
+                                        <option value="{{ $opsiTempat->tempat_kpi_id }}">{{ $opsiTempat->nama_instansi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <p class="small text-secondary mb-2" data-kandidat-ringkasan role="status"></p>
                         <div class="pk-checklist mb-3">
                             @foreach ($kandidat as $c)
                                 @php $sama = $tempatKelompok->contains($c->tempat_kpi_id); @endphp
-                                <label class="pk-check-row"><input class="form-check-input" type="checkbox" name="pengajuan_id[]" value="{{ $c->id }}" @checked($sama || $tempatKelompok->isEmpty() && $loop->first)>
+                                <label class="pk-check-row" data-kandidat-row data-tempat-id="{{ $c->tempat_kpi_id }}" data-tempat-sama="{{ $sama ? '1' : '0' }}" data-kandidat-nama="{{ $c->mahasiswa->nama_lengkap }}" data-kandidat-nim="{{ $c->mahasiswa->nim }}" data-kandidat-instansi="{{ $c->nama_instansi }}"><input class="form-check-input" type="checkbox" name="pengajuan_id[]" value="{{ $c->id }}" @checked($sama || $tempatKelompok->isEmpty() && $loop->first)>
                                     <span><span class="fw-semibold">{{ $c->mahasiswa->nama_lengkap }}</span> <span class="text-secondary">{{ $c->mahasiswa->nim }}</span>
                                         <span class="d-block small {{ $sama ? 'text-success' : 'text-secondary' }}">{{ $c->nama_instansi }}{{ $sama ? ', tempat sama' : '' }}</span></span></label>
                             @endforeach
                         </div>
+                        <p class="small text-secondary d-none" data-kandidat-kosong>Tidak ada mahasiswa yang cocok dengan pencarian/filter ini.</p>
                         <button class="btn btn-primary" type="submit">Tambahkan ke {{ $kelompok->nama_kelompok }}</button>
                     </form>
                 @endif

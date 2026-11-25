@@ -1,5 +1,43 @@
 // PrakTI — interaksi di sisi browser (tanpa build step)
 document.addEventListener('DOMContentLoaded', () => {
+  const normalisasiCari = (nilai) => nilai.toLocaleLowerCase('id').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  const perbaruiFilterKandidat = (filter) => {
+    const cari = normalisasiCari(filter.querySelector('[data-kandidat-search]').value.trim());
+    const tempat = filter.querySelector('[data-kandidat-tempat]').value;
+    const baris = [...filter.querySelectorAll('[data-kandidat-row]')];
+    let terlihat = 0;
+    let dipilih = 0;
+
+    baris.forEach((item) => {
+      const teks = normalisasiCari(`${item.dataset.kandidatNama} ${item.dataset.kandidatNim} ${item.dataset.kandidatInstansi}`);
+      const cocokCari = !cari || teks.includes(cari);
+      const cocokTempat = tempat === 'sama'
+        ? item.dataset.tempatSama === '1'
+        : (!tempat || item.dataset.tempatId === tempat);
+      item.hidden = !(cocokCari && cocokTempat);
+      if (!item.hidden) terlihat++;
+      if (item.querySelector('input[type="checkbox"]').checked) dipilih++;
+    });
+
+    const ringkasan = filter.querySelector('[data-kandidat-ringkasan]');
+    ringkasan.textContent = `Menampilkan ${terlihat} dari ${baris.length} mahasiswa. ${dipilih} dipilih; pilihan tetap tersimpan saat filter berubah.`;
+    filter.parentElement.querySelector('[data-kandidat-kosong]').classList.toggle('d-none', terlihat > 0);
+  };
+
+  document.querySelectorAll('[data-kandidat-filter]').forEach((filter) => {
+    filter.addEventListener('input', (event) => {
+      if (event.target.matches('[data-kandidat-search]')) perbaruiFilterKandidat(filter);
+    });
+    filter.addEventListener('change', (event) => {
+      if (event.target.matches('[data-kandidat-tempat]')) perbaruiFilterKandidat(filter);
+    });
+    filter.closest('form').addEventListener('change', (event) => {
+      if (event.target.matches('[data-kandidat-row] input[type="checkbox"]')) perbaruiFilterKandidat(filter);
+    });
+    perbaruiFilterKandidat(filter);
+  });
+
   document.addEventListener('click', (event) => {
     const tambahAnggota = event.target.closest('[data-tambah-anggota]');
     if (tambahAnggota) {
